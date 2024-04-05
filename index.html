@@ -19,17 +19,16 @@
           material="src: https://upload.wikimedia.org/wikipedia/en/a/a9/Example.jpg"
         ></a-plane>
       </a-entity>
-      <a-text value="Target Found" visible="false" id="debugText"></a-text>
+      <a-text value="" position="0 2 -3" id="debugText"></a-text>
       <a-camera position="0 0 0"></a-camera>
     </a-scene>
     <script>
       var debugText = document.getElementById('debugText');
-      var arEntity = document.querySelector('[simple-ar]');
-      arEntity.addEventListener('componentchanged', function (evt) {
-        if (evt.detail.name === 'visible') {
-          debugText.setAttribute('value', evt.detail.newData ? 'Target Found' : 'Target Lost');
-          debugText.setAttribute('visible', true);
-        }
+      document.addEventListener("targetFound", function (event) {
+        debugText.setAttribute('value', 'Target Found');
+      });
+      document.addEventListener("targetLost", function (event) {
+        debugText.setAttribute('value', 'Target Lost');
       });
     </script>
   </body>
