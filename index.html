@@ -19,7 +19,18 @@
           material="src: https://upload.wikimedia.org/wikipedia/en/a/a9/Example.jpg"
         ></a-plane>
       </a-entity>
+      <a-text value="Target Found" visible="false" id="debugText"></a-text>
       <a-camera position="0 0 0"></a-camera>
     </a-scene>
+    <script>
+      var debugText = document.getElementById('debugText');
+      var arEntity = document.querySelector('[simple-ar]');
+      arEntity.addEventListener('componentchanged', function (evt) {
+        if (evt.detail.name === 'visible') {
+          debugText.setAttribute('value', evt.detail.newData ? 'Target Found' : 'Target Lost');
+          debugText.setAttribute('visible', true);
+        }
+      });
+    </script>
   </body>
 </html>
